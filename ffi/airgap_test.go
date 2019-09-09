@@ -1,8 +1,8 @@
 package main
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -11,31 +11,30 @@ func Test_ImageNameFromNameParts(t *testing.T) {
 	registry := "localhost:5000"
 
 	tests := []struct {
-		name string
-		parts []string
-		expected    string
-		isError bool
+		name     string
+		parts    []string
+		expected string
+		isError  bool
 	}{
 		{
-			name: "bad name format",
-			parts:  []string{"quay.io", "debian", "latest"},
+			name:     "bad name format",
+			parts:    []string{"quay.io", "debian", "latest"},
 			expected: "",
-			isError: true,
+			isError:  true,
 		},
 		{
-			name: "four parts with tag",
-			parts:  []string{"quay.io", "someorg", "debian", "latest"},
+			name:     "four parts with tag",
+			parts:    []string{"quay.io", "someorg", "debian", "latest"},
 			expected: fmt.Sprintf("%s/someorg/debian:latest", registry),
-			isError: false,
+			isError:  false,
 		},
 		{
-			name: "five parts with sha",
-			parts:  []string{"quay.io", "someorg", "debian", "sha256", "1234567890abcdef"},
+			name:     "five parts with sha",
+			parts:    []string{"quay.io", "someorg", "debian", "sha256", "1234567890abcdef"},
 			expected: fmt.Sprintf("%s/someorg/debian@sha256:1234567890abcdef", registry),
-			isError: false,
+			isError:  false,
 		},
 	}
-
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {

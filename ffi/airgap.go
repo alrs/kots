@@ -5,12 +5,12 @@ import "C"
 import (
 	"archive/tar"
 	"compress/gzip"
-	"os/exec"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 
 	"github.com/mholt/archiver"
@@ -311,11 +311,11 @@ func imageNameFromNameParts(registry string, nameParts []string) (string, error)
 
 	var name, tag string
 	nameParts[0] = registry
-	if nameParts[len(nameParts) - 2] == "sha256" {
-		tag = fmt.Sprintf("@sha256:%s", nameParts[len(nameParts) - 1])
+	if nameParts[len(nameParts)-2] == "sha256" {
+		tag = fmt.Sprintf("@sha256:%s", nameParts[len(nameParts)-1])
 		name = filepath.Join(nameParts[:len(nameParts)-2]...)
 	} else {
-		tag = fmt.Sprintf(":%s", nameParts[len(nameParts) - 1])
+		tag = fmt.Sprintf(":%s", nameParts[len(nameParts)-1])
 		name = filepath.Join(nameParts[:len(nameParts)-1]...)
 	}
 
